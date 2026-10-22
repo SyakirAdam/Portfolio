@@ -218,4 +218,183 @@
   }
   initProjectDetailNav();
 
+  /* ---------- Futuristic Animated Network Background ---------- */
+  function initNetworkBackground() {
+    const canvas = document.getElementById('network-canvas');
+
+    // Stop safely if the canvas is not present on this page
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const reducedMotion = window.matchMedia(
+      '(prefers-reduced-motion: reduce)'
+    ).matches;
+
+    let width = 0;
+    let height = 0;
+    let animationId;
+    let particles = [];
+
+    const mouse = { x: null, y: null };
+    const particleCount = window.innerWidth < 768 ? 35 : 75;
+    const connectionDistance = 130;
+
+    function resizeCanvas() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      width = window.innerWidth;
+      height = window.innerHeight;
+
+      canvas.width = width * dpr;
+      canvas.height = height * dpr;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+      particles = Array.from({ length: particleCount }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - 0.5) * 0.5,
+        vy: (Math.random() - 0.5) * 0.5,
+        radius: Math.random() * 1.8 + 0.6
+      }));
+
+      drawFrame();
+    }
+
+    function drawFrame() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach((particle, i) => {
+        if (!reducedMotion) {
+          particle.x += particle.vx;
+          particle.y += particle.vy;
+
+          if (particle.x < 0 || particle.x > width) {
+            particle.vx *= -1;
+          }
+
+          if (particle.y < 0 || particle.y > height) {
+            particle.vy *= -1;
+          }
+        }
+
+        // Connect nearby particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const other = particles[j];
+          const dx = particle.x - other.x;
+          const dy = particle.y - other.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < connectionDistance) {
+            const opacity = (1 - distance / connectionDistance) * 0.35;
+
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(other.x, other.y);
+            ctx.strokeStyle = `rgba(0, 200, 255, ${opacity})`;
+            ctx.lineWidth = 0.7;
+            ctx.stroke();
+          }
+        }
+
+        // Highlight particles near the mouse
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = particle.x - mouse.x;
+          const dy = particle.y - mouse.y;
+          const distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 150) {
+            ctx.beginPath();
+            ctx.moveTo(particle.x, particle.y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle =
+              `rgba(0, 220, 255, ${(1 - distance / 150) * 0.5})`;
+            ctx.stroke();
+          }
+        }
+
+        // Draw glowing cyan particles
+        ctx.beginPath();
+        ctx.arc(particle.x, particle.y, particle.radius, 0, Math.PI * 2);
+        ctx.fillStyle = '#00c8ff';
+        ctx.shadowBlur = 8;
+        ctx.shadowColor = '#00c8ff';
+        ctx.fill();
+        ctx.shadowBlur = 0;
+      });
+
+      if (!reducedMotion && !document.hidden) {
+        animationId = requestAnimationFrame(drawFrame);
+      }
+    }
+
+    function handleMouseMove(event) {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    }
+
+    function handleMouseLeave() {
+      mouse.x = null;
+      mouse.y = null;
+    }
+
+    function handleVisibilityChange() {
+      if (document.hidden) {
+        cancelAnimationFrame(animationId);
+      } else if (!reducedMotion) {
+        cancelAnimationFrame(animationId);
+        animationId = requestAnimationFrame(drawFrame);
+      } else {
+        drawFrame();
+      }
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('mousemove', handleMouseMove, { passive: true });
+    window.addEventListener('mouseout', (event) => {
+      if (!event.relatedTarget) handleMouseLeave();
+    });
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    resizeCanvas();
+  }
+
+  initNetworkBackground();
+
+/* ===== CONTACT FORM: OPEN EMAIL APPLICATION ===== */
+
+const contactForm = document.getElementById("contact-form");
+
+if (contactForm) {
+    contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const name = document.getElementById("contact-name").value.trim();
+        const email = document.getElementById("contact-email").value.trim();
+        const subject = document.getElementById("contact-subject").value.trim();
+        const message = document.getElementById("contact-message").value.trim();
+
+        const recipient = "syakiradam88@gmail.com";
+
+        const emailBody = [
+            `Name: ${name}`,
+            `Reply email: ${email}`,
+            "",
+            "Project / Work Details:",
+            message
+        ].join("\n");
+
+        const mailtoLink =
+            `mailto:${recipient}` +
+            `?subject=${encodeURIComponent(subject)}` +
+            `&body=${encodeURIComponent(emailBody)}`;
+
+        window.location.href = mailtoLink;
+    });
+}
+
 })();

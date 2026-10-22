@@ -15,6 +15,9 @@
 </head>
 <body>
 
+  <!-- Animated particle network background -->
+  <canvas id="network-canvas" aria-hidden="true"></canvas>
+
   <!-- ========== NAVIGATION ========== -->
   <nav class="navbar" role="navigation" aria-label="Main navigation">
     <div class="container">
@@ -49,7 +52,7 @@
 
   <!-- ========== HERO SECTION ========== -->
   <section class="hero" id="home">
-    <div class="container">
+    <div class="container hero-layout">
       <div class="hero-content">
         <div class="hero-badge">
           <span class="pulse"></span>
@@ -82,7 +85,54 @@
           <a href="#projects" class="btn-primary">
             <i class='bx bx-briefcase'></i> View Projects
           </a>
+          <a href="https://www.linkedin.com/in/muhammad-syakir-adam-bin-mohamad-nazri-2ab940255/" class="btn-primary" target="_blank" rel="noopener noreferrer">
+            <i class='bx bxl-linkedin'></i> Linkedin
+          </a>
         </div>
+      </div>
+
+      <!--RIGHT-SIDE TECHNOLOGY ICONS-->
+      <div class="hero-tech-visual" aria-label="Technology skills">
+
+        <div class="tech-orbit orbit-one"></div>
+        <div class="tech-orbit orbit-two"></div>
+
+        <div class="tech-center">
+          <i class="bx bx-data"></i>
+          <span>DATA</span>
+          <small>ANALYTICS</small>
+        </div>
+
+        <div class="tech-float-icon python">
+          <img src="image/python.png" alt="Python">
+          <span>Python</span>
+        </div>
+
+        <div class="tech-float-icon powerbi">
+          <img src="image/powerbi.png" alt="Power BI">
+          <span>Power BI</span>
+        </div>
+
+        <div class="tech-float-icon sql">
+          <img src="image/sql.png" alt="SQL">
+          <span>SQL</span>
+        </div>
+
+        <div class="tech-float-icon tableau">
+          <img src="image/html.png" alt="Tableau">
+          <span>HTML</span>
+        </div>
+
+        <div class="tech-float-icon excel">
+          <img src="image/excel.png" alt="Excel">
+          <span>Excel</span>
+        </div>
+
+        <div class="tech-float-icon github">
+          <img src="https://cdn.simpleicons.org/github/E2E8F0" alt="GitHub">
+          <span>GitHub</span>
+        </div>
+
       </div>
     </div>
   </section>
@@ -217,7 +267,7 @@
         <button class="tab-btn" data-tab="datascience">Data Analytics & Visualization</button>
         <button class="tab-btn" data-tab="tools">Tools</button>
         <button class="tab-btn" data-tab="design">Design</button>
-        <button class="tab-btn" data-tab="office">Microsoft Office</button>
+        <button class="tab-btn" data-tab="office">Operational</button>
         <button class="tab-btn" data-tab="spoken">Spoken Languages</button>
       </div>
 
@@ -438,9 +488,6 @@
           </div>
         </article>
 
-        
-
-        
       </div>
     </div>
   </section>
@@ -453,16 +500,26 @@
         <h2 class="section-title">Contact <span class="highlight">Me</span></h2>
         <p class="section-desc">I'm currently looking for any opportunities. Feel free to reach out!</p>
       </div>
-
       <div class="contact-grid">
-        <div class="contact-info fade-in">
-          <div class="contact-item">
-            <div class="contact-icon"><i class='bx bxs-envelope'></i></div>
+        <div class="contact-info fade-in">      
+          <a href="mailto:syakiradam88@gmail.com" class="contact-item contact-link">
+            <div class="contact-icon">
+              <i class='bx bxs-envelope'></i>
+            </div>
             <div class="contact-item-text">
               <h4>Email</h4>
-              <a href="mailto:syakiradam88@gmail.com">syakiradam88@gmail.com</a>
+              <span>syakiradam88@gmail.com</span>
             </div>
-          </div>
+          </a>        
+          <a href="https://github.com/SyakirAdam" class="contact-item contact-link" target="_blank" rel="noopener noreferrer">
+            <div class="contact-icon">
+              <i class='bx bxl-github'></i>
+            </div>
+            <div class="contact-item-text">
+              <h4>Github</h4>
+              <span>syakir-adam</span>
+            </div>
+          </a>
           <!--
           <div class="contact-item">
             <div class="contact-icon"><i class='bx bxs-phone'></i></div>
@@ -472,23 +529,64 @@
             </div>
           </div>
           -->
-          <div class="contact-item">
-            <div class="contact-icon"><i class='bx bxl-linkedin'></i></div>
+          <a href="https://www.linkedin.com/in/muhammad-syakir-adam-bin-mohamad-nazri-2ab940255/" class="contact-item contact-link" target="_blank" rel="noopener noreferrer">
+            <div class="contact-icon">
+              <i class='bx bxl-linkedin'></i>
+            </div>
             <div class="contact-item-text">
               <h4>LinkedIn</h4>
-              <a href="https://www.linkedin.com/in/muhammad-syakir-adam-bin-mohamad-nazri-2ab940255/" target="_blank" rel="noopener noreferrer">syakir-adam</a>
+              <span>syakir-adam</span>
             </div>
-          </div>
+          </a>
+          <a href="resume/Syakir-Adam-Resume.pdf" class="contact-item contact-link" target="_blank" rel="noopener noreferrer"> 
+            <div class="contact-icon">
+              <i class='bx bx-download'></i>
+            </div>
+            <div class="contact-item-text">
+              <h4>Resume</h4>
+              <span>Resume Syakir Adam</span>
+            </div>
+          </a>
         </div>
+        
+        <!-- RIGHT SIDE: CONTACT FORM -->
+        <div class="contact-form-wrapper">
 
-        <div class="fade-in">
-          <p class="section-desc" style="margin-bottom:1.5rem;">Connect with me on social media:</p>
-          <div class="contact-socials">
-            <a href="https://www.linkedin.com/in/muhammad-syakir-adam-bin-mohamad-nazri-2ab940255/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class='bx bxl-linkedin'></i></a>
-            <a href="https://github.com/SyakirAdam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class='bx bxl-github'></i></a>
-            <a href="mailto:syakiradam88@gmail.com" aria-label="Email"><i class='bx bxs-envelope'></i></a>
-          <!-- <a href="tel:+60145027614" aria-label="Phone"><i class='bx bxs-phone'></i></a> --> 
+          <div class="contact-form-heading">
+            <h3>Let's <span class="highlight">Connect</span></h3>
+            <p>
+              Have a project, job opportunity or collaboration in mind? Feel free to reach me out.
+            </p>
           </div>
+
+          <form id="contact-form" class="contact-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label for="contact-name">Your Name</label>
+                <input type="text" id="contact-name" name="name" placeholder="Enter your name" autocomplete="name" required >
+              </div>
+
+              <div class="form-group">
+                <label for="contact-email">Your Email</label>
+                <input type="email" id="contact-email" name="email" placeholder="name@example.com" autocomplete="email" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-subject">Subject</label>
+              <input type="text" id="contact-subject" name="subject" placeholder="Job opportunity / Project enquiry" required>
+            </div>
+
+            <div class="form-group">
+              <label for="contact-message">Project or Work Details</label>
+              <textarea id="contact-message" name="message" rows="6" placeholder="Tell me about your project, job opportunity, requirements or collaboration..." required></textarea>
+            </div>
+            <button type="submit" class="contact-submit-btn"><i class="bx bx-send"></i>Send Message</button>
+            <p class="form-note">
+              <i class="bx bx-info-circle"></i>
+              Your message will be prepared in your default email application.
+            </p>
+          </form>
         </div>
       </div>
     </div>
@@ -500,11 +598,12 @@
       <div class="footer-links">
         <a href="#home">Home</a>
         <a href="#about">About</a>
+        <a href="#experience">Background</a>
+        <a href="#skills">Skills</a>
         <a href="#projects">Projects</a>
         <a href="#contact">Contact</a>
       </div>
-      <p>Muhammad Syakir Adam Bin Mohamad Nazri</p>
-      <p>&copy; 2026 Muhammad Syakir Adam. All rights reserved.</p>
+      <p>&copy; 2026 Muhammad Syakir Adam bin Mohamad Nazri. All rights reserved.</p>
       <a href="#home" class="back-to-top" aria-label="Back to top"><i class='bx bx-up-arrow-alt'></i></a>
     </div>
   </footer>
